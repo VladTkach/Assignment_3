@@ -11,11 +11,10 @@ int main(int size, char *arg[]) {
     if (!line.empty()) {
         example example(line);
         stack tokens = example.getTokens();
-        station station;
 
-        stack test = station::getQueue(tokens);
-        string sign = test.getElement();
-        cout << "Result: " << calc(test, sign);
+        stack details = station::getQueue(tokens);
+        string sign = details.getElement();
+        cout << "Result: " << calc(details, sign);
 
     }
     return 0;
