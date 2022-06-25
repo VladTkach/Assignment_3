@@ -7,6 +7,8 @@ using namespace std;
 
 bool isNumber(string number);
 
+bool isNumber(char number);
+
 bool isOpen(string &token);
 
 bool isClose(string &token);

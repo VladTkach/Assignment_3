@@ -2,22 +2,27 @@
 
 double calc(stack &queue, string &sign) {
     queue.deleteElement();
-    double a, b;
+    double a = 0, b = 0;
+
     a = getValue(queue, sign);
     b = getValue(queue, sign);
     return operation(a, b, sign);
 }
 
 double getValue(stack &queue, string &sign) {
-    string current = queue.getElement();
-    if (isNumber(current)) {
-        queue.deleteElement();
-        return toDouble(current);
+    if (!queue.isEmpty()) {
+        string current = queue.getElement();
+        if (isNumber(current)) {
+            queue.deleteElement();
+            return toDouble(current);
+        }
+        return calc(queue, current);
     }
-    return calc(queue, current);
+    return 0;
 }
 
 double operation(double a, double b, string &operation) {
+//    cout << a << operation << b << endl;
     if (operation == "+") {
         return a + b;
     }

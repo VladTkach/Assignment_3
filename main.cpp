@@ -1,21 +1,22 @@
 #include "stack.h"
 #include "calc.h"
-#include "example.h"
-#include "station.h"
+#include "ShuntingYard.h"
 
 int main(int size, char *arg[]) {
     string line;
-    for (int i = 1; i < size; ++i) {
-        line += arg[i];
-    }
-    if (!line.empty()) {
-        example example(line);
-        stack tokens = example.getTokens();
+//    for (int i = 1; i < size; ++i) {
+//        line += arg[i];
+//    }
+//    if (!line.empty()) {
+    getline(cin, line);
 
-        stack details = station::getQueue(tokens);
-        string sign = details.getElement();
-        cout << "Result: " << calc(details, sign);
+    stack notation = ShuntingYard::getNotation(line);
+    cout << "notation: ";
+    notation.show();
 
-    }
+    string sign = notation.getElement();
+    cout << "Result: " << endl << calc(notation, sign);
+
+//    }
     return 0;
 }

@@ -1,25 +1,19 @@
 #include "func.h"
 
-bool isNumber(string number){
-    if (number.length() == 1 && number[0] <= 47 || number[0] >= 58 ){
-        return false;
-    }
-    return true;
-
+bool isNumber(string number) {
+    return (number.length() == 1 && number[0] > 47 && number[0] < 58);
 }
 
-bool isOpen(string &token){
-    if (token == "("){
-        return true;
-    }
-    return false;
+bool isNumber(char number) {
+    return number > 47 && number < 58;
 }
 
-bool isClose(string &token){
-    if (token == ")"){
-        return true;
-    }
-    return false;
+bool isOpen(string &token) {
+    return token == "(";
+}
+
+bool isClose(string &token) {
+    return token == ")";
 }
 
 int getPrecedence(string &token) {
@@ -29,7 +23,7 @@ int getPrecedence(string &token) {
     if (token == "*" || token == "/") {
         return 2;
     }
-    if (token == "^") {
+    if (token == "^" || token == "m") {
         return 3;
     }
     if (token == "(") {
@@ -40,7 +34,7 @@ int getPrecedence(string &token) {
 
 bool getAssociativity(string &token) {
 
-    if (token == "^") {
+    if (token == "^" || token == "m") {
         return true;
     }
     return false;

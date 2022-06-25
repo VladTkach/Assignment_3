@@ -6,16 +6,16 @@
 
 using namespace std;
 
-class station {
+class ShuntingYard {
     static void pushScope(stack &array, stack &queue);
 
     static void pushOperation(stack &array, stack &queue, string &current);
 
-    static void pushOperation2(stack &array, stack &queue, string &current);
-
     static void takeCashBack(stack &array, stack &queue);
 
+    static string getNumber(int &start, string &line);
 
 public:
-    static stack getQueue(stack &token);
+    static stack getNotation(string &line);
+
 };
