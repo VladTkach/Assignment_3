@@ -1,7 +1,7 @@
 #include "func.h"
 
 bool isNumber(string number) {
-    return (number.length() == 1 && number[0] > 47 && number[0] < 58);
+    return (number[0] > 47 && number[0] < 58);
 }
 
 bool isNumber(char number) {
@@ -33,9 +33,5 @@ int getPrecedence(string &token) {
 }
 
 bool getAssociativity(string &token) {
-
-    if (token == "^" || token == "m") {
-        return true;
-    }
-    return false;
+    return token == "^" || token == "m";
 }

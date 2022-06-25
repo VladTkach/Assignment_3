@@ -15,6 +15,8 @@ class ShuntingYard {
 
     static string getNumber(int &start, string &line);
 
+    static void ifUnary(int index, string &line);
+
 public:
     static stack getNotation(string &line);
 

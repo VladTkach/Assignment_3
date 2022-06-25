@@ -5,6 +5,7 @@ stack ShuntingYard::getNotation(string &line) {
     stack array;
     string current;
     for (int i = 0; i < line.length(); ++i) {
+        ifUnary(i, line);
         current = line[i];
         if (isNumber(current)) {
             current = getNumber(i, line);
@@ -17,7 +18,6 @@ stack ShuntingYard::getNotation(string &line) {
             pushOperation(array, queue, current);
         }
     }
-
     takeCashBack(array, queue);
     return queue;
 }
@@ -59,16 +59,20 @@ void ShuntingYard::pushScope(stack &array, stack &queue) {
 string ShuntingYard::getNumber(int &start, string &line) {
     string number;
     while (start < line.length()) {
-        if (isNumber(line[start])){
-            number += line[start];
-            start++;
-        }
-        else{
+        if (isNumber(line[start]) || line[start] == '.')
+            number += line[start++];
+        else
             break;
-        }
     }
     start--;
     return number;
+}
+
+void ShuntingYard::ifUnary(int index, string &line) {
+    if( line[index] == '-' && (index == 0 || line[index - 1] <= 47 ||
+    line[index - 1] >= 58 || line[index + 1] >= 58)){
+        line[index] = 'm';
+    }
 }
 
 

@@ -2,9 +2,12 @@
 
 double calc(stack &queue, string &sign) {
     queue.deleteElement();
-    double a = 0, b = 0;
+    double a, b;
 
     a = getValue(queue, sign);
+    if (sign == "m"){
+        return operation(a, 0, sign);
+    }
     b = getValue(queue, sign);
     return operation(a, b, sign);
 }
@@ -26,7 +29,7 @@ double operation(double a, double b, string &operation) {
     if (operation == "+") {
         return a + b;
     }
-    if (operation == "-") {
+    if (operation == "-" || operation == "m") {
         return b - a;
     }
     if (operation == "*") {
