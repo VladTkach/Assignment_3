@@ -25,7 +25,6 @@ double getValue(stack<string> &queue, string &sign) {
 }
 
 double operation(double a, double b, string &operation) {
-//    cout << a << operation << b << endl;
     if (operation == "+") {
         return a + b;
     }

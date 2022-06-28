@@ -30,6 +30,8 @@ public:
     };
 
     T getElement() {
+        if (size == 0)
+            return 0;
         return array[size - 1];
     };
 

@@ -9,14 +9,9 @@ int main(int size, char *arg[]) {
 //    }
 //    if (!line.empty()) {
     getline(cin, line);
-    stack<string> notation = ShuntingYard::getNotation(line);
-    if (notation.getSize() == 1) {
-        cout << "Result: " << notation.getElement();
-    } else {
-        notation.show();
-        string sign = notation.getElement();
-        cout << "Result: " << calc(notation, sign);
-    }
+    double result;
+    result = ShuntingYard::getNotation(line);
+    cout << "Result: " << result;
 //    }
     return 0;
 }
