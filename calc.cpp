@@ -1,6 +1,6 @@
 #include "calc.h"
 
-double calc(stack &queue, string &sign) {
+double calc(stack<string> &queue, string &sign) {
     queue.deleteElement();
     double a, b;
 
@@ -12,7 +12,7 @@ double calc(stack &queue, string &sign) {
     return operation(a, b, sign);
 }
 
-double getValue(stack &queue, string &sign) {
+double getValue(stack<string> &queue, string &sign) {
     if (!queue.isEmpty()) {
         string current = queue.getElement();
         if (isNumber(current)) {

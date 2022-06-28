@@ -1,8 +1,8 @@
 #include "ShuntingYard.h"
 
-stack ShuntingYard::getNotation(string &line) {
-    stack queue;
-    stack array;
+stack<string> ShuntingYard::getNotation(string &line) {
+    stack<string> queue;
+    stack<string> array;
     string current;
     for (int i = 0; i < line.length(); ++i) {
         ifUnary(i, line);
@@ -22,7 +22,7 @@ stack ShuntingYard::getNotation(string &line) {
     return queue;
 }
 
-void ShuntingYard::pushOperation(stack &array, stack &queue, string &current) {
+void ShuntingYard::pushOperation(stack<string> &array, stack<string> &queue, string &current) {
     if (!array.isEmpty()) {
         string temp = array.getElement();
         if (getPrecedence(current) <= getPrecedence(temp) && !getAssociativity(current) ||
@@ -35,7 +35,7 @@ void ShuntingYard::pushOperation(stack &array, stack &queue, string &current) {
 }
 
 
-void ShuntingYard::takeCashBack(stack &array, stack &queue) {
+void ShuntingYard::takeCashBack(stack<string> &array, stack<string> &queue) {
     while (!array.isEmpty()) {
         string current = array.getElement();
         queue.addElement(current);
@@ -43,7 +43,7 @@ void ShuntingYard::takeCashBack(stack &array, stack &queue) {
     }
 }
 
-void ShuntingYard::pushScope(stack &array, stack &queue) {
+void ShuntingYard::pushScope(stack<string> &array, stack<string> &queue) {
     while (!array.isEmpty()) {
         string current = array.getElement();
         if (current == "(") {

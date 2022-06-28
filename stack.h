@@ -4,31 +4,66 @@
 
 using namespace std;
 
+template<typename T>
 class stack {
     int size;
-    string *array;
+    T *array;
     int maxSize;
 
 public:
-    stack();
+    stack() {
+        size = 0;
+        maxSize = 1;
+        array = new T[maxSize];
+    };
 
-    ~stack();
+    ~stack() {
+        delete[] array;
+    };
 
-    void addElement(string&);
+    void addElement(T& elem) {
+        if (size + 1 > maxSize) {
+            resize();
+        }
+        array[size] = elem;
+        size++;
+    };
 
-    string getElement();
+    T getElement() {
+        return array[size - 1];
+    };
 
-    void deleteElement();
+    void deleteElement() {
+        if (!isEmpty()) {
+            size--;
+        }
+    };
 
-    void show();
+    void show(){
+        for (int i = 0; i < size; ++i) {
+            cout << array[i] << " ";
+        }
+        cout << endl;
+    };
 
-    bool isEmpty();
+    bool isEmpty(){
+        return (size == 0);
+    };
 
-    int getSize() const;
+    int getSize() const{
+        return size;
+    };
 
-    void reverse();
+    void resize(){
+        maxSize *= 2;
+        T *new_array = new T[maxSize];
+        for (int i = 0; i < size; ++i) {
+            new_array[i] = array[i];
+        }
+        delete[] array;
+        array = new_array;
 
-    void resize();
+    };
 
 
 };
