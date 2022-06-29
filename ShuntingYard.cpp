@@ -5,15 +5,15 @@ double ShuntingYard::getNotation(string &line) {
     stack<string> array;
     string current;
     for (int i = 0; i < line.length(); ++i) {
-        ifUnary(i, line);
+        check::ifUnary(i, line);
         current = line[i];
-        if (isNumber(current)) {
+        if (check::isNumber(current)) {
             current = getNumber(i, line);
-            double elem = toDouble(current);
+            double elem = calc::toDouble(current);
             test.addElement(elem);
-        } else if (isOpen(current)) {
+        } else if (check::isOpen(current)) {
             array.addElement(current);
-        } else if (isClose(current)) {
+        } else if (check::isClose(current)) {
             pushScope(array, test);
         } else {
             pushOperation(array, current, test);
@@ -27,14 +27,14 @@ double ShuntingYard::getNotation(string &line) {
 void ShuntingYard::pushOperation(stack<string> &array, string &current, stack<double> &test) {
     if (!array.isEmpty()) {
         string temp = array.getElement();
-        if (getPrecedence(current) <= getPrecedence(temp) && !getAssociativity(current) ||
-            getPrecedence(current) < getPrecedence(temp) && getAssociativity(current)) {
+        if (check::getPrecedence(current) <= check::getPrecedence(temp) && !check::getAssociativity(current) ||
+                check::getPrecedence(current) < check::getPrecedence(temp) && check::getAssociativity(current)) {
             addOperation(test, temp);
             array.deleteElement();
-            if (getAssociativity(temp)) {
+            if (check::getAssociativity(temp)) {
                 while (!array.isEmpty()) {
                     temp = array.getElement();
-                    if (!getAssociativity(temp)) {
+                    if (!check::getAssociativity(temp)) {
                         break;
                     } else {
                         addOperation(test, temp);
@@ -72,20 +72,13 @@ void ShuntingYard::pushScope(stack<string> &array, stack<double> &test) {
 string ShuntingYard::getNumber(int &start, string &line) {
     string number;
     while (start < line.length()) {
-        if (isNumber(line[start]) || line[start] == '.')
+        if (check::isNumber(line[start]) || line[start] == '.')
             number += line[start++];
         else
             break;
     }
     start--;
     return number;
-}
-
-void ShuntingYard::ifUnary(int index, string &line) {
-    if (line[index] == '-' && (index == 0 || line[index - 1] <= 47 ||
-                               line[index - 1] >= 58 || line[index + 1] >= 58)) {
-        line[index] = 'm';
-    }
 }
 
 void ShuntingYard::addOperation(stack<double> &test, string &oper) {
@@ -101,27 +94,8 @@ void ShuntingYard::addOperation(stack<double> &test, string &oper) {
         test.deleteElement();
     }
 
-    double res = operation(a, b, oper);
+    double res = calc::operation(a, b, oper);
     test.addElement(res);
-}
-
-double ShuntingYard::operation(double a, double b, string &operation) {
-    if (operation == "+") {
-        return a + b;
-    }
-    if (operation == "-" || operation == "m") {
-        return b - a;
-    }
-    if (operation == "*") {
-        return a * b;
-    }
-    if (operation == "/") {
-        return b / a;
-    }
-    if (operation == "^") {
-        return pow(b, a);
-    }
-    return 0;
 }
 
 

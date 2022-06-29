@@ -3,12 +3,19 @@
 #include <iostream>
 #include <cmath>
 #include <sstream>
-#include "func.h"
+#include "check.h"
 
 using namespace std;
 
-double operation(double a, double b, string &operation);
+class calc{
+public:
+    static double operation(double a, double b, string &operation);
 
-double toDouble(string &item);
+    static double toDouble(string &item);
+};
+
+
+
+
 
 

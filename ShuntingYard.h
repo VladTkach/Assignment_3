@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "stack.h"
-#include "func.h"
+#include "check.h"
 #include "calc.h"
 
 using namespace std;
@@ -16,12 +16,10 @@ class ShuntingYard {
 
     static string getNumber(int &start, string &line);
 
-    static void ifUnary(int index, string &line);
-
-    static double operation(double a, double b, string &operation);
+    static void addOperation(stack<double> &test, string &oper);
 
 public:
     static double getNotation(string &line);
 
-    static void addOperation(stack<double> &test, string &oper);
+
 };
