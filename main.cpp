@@ -1,17 +1,12 @@
 #include "stack.h"
-#include "calc.h"
 #include "ShuntingYard.h"
+#include "LineProcessing.h"
 
 int main(int size, char *arg[]) {
-    string line;
-//    for (int i = 1; i < size; ++i) {
-//        line += arg[i];
-//    }
-//    if (!line.empty()) {
-    getline(cin, line);
-    double result;
-    result = ShuntingYard::getNotation(line);
-    cout << "Result: " << result;
-//    }
+    string line = LineProcessing::getLine(size, arg);
+    if (!line.empty()) {
+        double result = ShuntingYard::getNotation(line);
+        cout << "Result: " << result;
+    }
     return 0;
 }
