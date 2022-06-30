@@ -37,8 +37,8 @@ bool check::getAssociativity(string &token) {
 }
 
 void check::ifUnary(int index, string &line) {
-    if (line[index] == '-' && (index == 0 || line[index - 1] <= 47 ||
-                               line[index - 1] >= 58 || line[index + 1] >= 58)) {
+    if (line[index] == '-' && (index == 0 || ((line[index - 1] <= 47 ||
+                               line[index - 1] >= 58) && line[index - 1] != ')') || line[index + 1] >= 58)) {
         line[index] = 'm';
     }
 }

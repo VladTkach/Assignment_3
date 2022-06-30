@@ -26,21 +26,15 @@ double ShuntingYard::getNotation(string &line) {
 
 void ShuntingYard::pushOperation(stack<string> &array, string &current, stack<double> &test) {
     if (!array.isEmpty()) {
-        string temp = array.getElement();
-        if (check::getPrecedence(current) <= check::getPrecedence(temp) && !check::getAssociativity(current) ||
+        while (!array.isEmpty()) {
+            string temp = array.getElement();
+            if (check::getPrecedence(current) <= check::getPrecedence(temp) && !check::getAssociativity(current) ||
                 check::getPrecedence(current) < check::getPrecedence(temp) && check::getAssociativity(current)) {
-            addOperation(test, temp);
-            array.deleteElement();
-            if (check::getAssociativity(temp)) {
-                while (!array.isEmpty()) {
-                    temp = array.getElement();
-                    if (!check::getAssociativity(temp)) {
-                        break;
-                    } else {
-                        addOperation(test, temp);
-                        array.deleteElement();
-                    }
-                }
+                addOperation(test, temp);
+                array.deleteElement();
+            }
+            else{
+                break;
             }
         }
     }
@@ -86,10 +80,9 @@ void ShuntingYard::addOperation(stack<double> &test, string &oper) {
     a = test.getElement();
     test.deleteElement();
 
-    if (oper == "m"){
+    if (oper == "m") {
         b = 0;
-    }
-    else{
+    } else {
         b = test.getElement();
         test.deleteElement();
     }
